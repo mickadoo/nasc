@@ -9,8 +9,7 @@ class AbstractRepo
         $result = $this->findBy($params);
 
         if (count($result) !== 1) {
-            $err = sprintf('Expected single %s but found %d', $this->getEntityName(), count($result));
-            throw new \RuntimeException($err);
+            return null;
         }
 
         return reset($result);
