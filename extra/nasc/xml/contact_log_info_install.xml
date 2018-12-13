@@ -1,0 +1,880 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+
+<CustomData>
+  <CustomGroups>
+    <CustomGroup>
+      <name>Contact_Log_Information</name>
+      <title>Contact Log Information</title>
+      <extends>Activity</extends>
+      <extends_entity_column_value_option_group>activity_type</extends_entity_column_value_option_group>
+      <extends_entity_column_value>Meeting,Phone Call</extends_entity_column_value>
+      <style>Inline</style>
+      <collapse_display>1</collapse_display>
+      <help_pre>&lt;p&gt;Additional information about a contact meeting outcome&lt;/p&gt;</help_pre>
+      <weight>2</weight>
+      <is_active>1</is_active>
+      <table_name>civicrm_value_contact_log_i_6</table_name>
+      <is_multiple>0</is_multiple>
+      <collapse_adv_display>0</collapse_adv_display>
+      <created_date>2018-12-13 15:26:38</created_date>
+      <is_reserved>0</is_reserved>
+      <is_public>1</is_public>
+    </CustomGroup>
+  </CustomGroups>
+  <CustomFields>
+    <CustomField>
+      <name>Intervention</name>
+      <label>Intervention</label>
+      <data_type>String</data_type>
+      <html_type>Multi-Select</html_type>
+      <is_required>0</is_required>
+      <is_searchable>0</is_searchable>
+      <is_search_range>0</is_search_range>
+      <weight>1</weight>
+      <is_active>1</is_active>
+      <is_view>0</is_view>
+      <text_length>255</text_length>
+      <note_columns>60</note_columns>
+      <note_rows>4</note_rows>
+      <column_name>intervention_62</column_name>
+      <in_selector>0</in_selector>
+      <option_group_name>intervention</option_group_name>
+      <custom_group_name>Contact_Log_Information</custom_group_name>
+    </CustomField>
+    <CustomField>
+      <name>Outcomes</name>
+      <label>Outcomes</label>
+      <data_type>String</data_type>
+      <html_type>Multi-Select</html_type>
+      <is_required>0</is_required>
+      <is_searchable>0</is_searchable>
+      <is_search_range>0</is_search_range>
+      <weight>2</weight>
+      <is_active>1</is_active>
+      <is_view>0</is_view>
+      <text_length>255</text_length>
+      <note_columns>60</note_columns>
+      <note_rows>4</note_rows>
+      <column_name>outcomes_63</column_name>
+      <in_selector>0</in_selector>
+      <option_group_name>outcomes</option_group_name>
+      <custom_group_name>Contact_Log_Information</custom_group_name>
+    </CustomField>
+  </CustomFields>
+  <OptionGroups>
+    <OptionGroup>
+      <name>intervention</name>
+      <title>Intervention</title>
+      <data_type>String</data_type>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <is_locked>0</is_locked>
+    </OptionGroup>
+    <OptionGroup>
+      <name>outcomes</name>
+      <title>Outcomes</title>
+      <data_type>String</data_type>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <is_locked>0</is_locked>
+    </OptionGroup>
+  </OptionGroups>
+  <OptionValues>
+    <OptionValue>
+      <label>Access to emergency and longer-term accommodation for victims of domestic abuse</label>
+      <value>1</value>
+      <name>Access_to_emergency_and_longer_</name>
+      <is_default>0</is_default>
+      <weight>1</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>intervention</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Support to secure independent residency status for victims of domestic violence</label>
+      <value>2</value>
+      <name>Support_to_secure_independent_r</name>
+      <is_default>0</is_default>
+      <weight>2</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>intervention</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Support with English language</label>
+      <value>3</value>
+      <name>Support_with_English_language</name>
+      <is_default>0</is_default>
+      <weight>3</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>intervention</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Support with school entry</label>
+      <value>4</value>
+      <name>Support_with_school_entry</name>
+      <is_default>0</is_default>
+      <weight>4</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>intervention</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Advocacy to Direct Provision centre management</label>
+      <value>5</value>
+      <name>Advocacy_to_Direct_Provision_ce</name>
+      <is_default>0</is_default>
+      <weight>5</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>intervention</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Asylum seekers right to work/self employment</label>
+      <value>6</value>
+      <name>Asylum_seekers_right_to_work_se</name>
+      <is_default>0</is_default>
+      <weight>6</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>intervention</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Asylum seekers  access to courses</label>
+      <value>7</value>
+      <name>Asylum_seekers_access_to_course</name>
+      <is_default>0</is_default>
+      <weight>7</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>intervention</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Registration with immigration services</label>
+      <value>8</value>
+      <name>Registration_with_immigration_s</name>
+      <is_default>0</is_default>
+      <weight>8</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>intervention</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Information and support on scholarships and access to third level education for asylum seekers</label>
+      <value>9</value>
+      <name>Information_and_support_on_scho</name>
+      <is_default>0</is_default>
+      <weight>9</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>intervention</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>PLC education and training information</label>
+      <value>10</value>
+      <name>PLC_education_and_training_info</name>
+      <is_default>0</is_default>
+      <weight>10</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>intervention</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Advice on immigration system</label>
+      <value>11</value>
+      <name>Advice on immigration system</name>
+      <filter>0</filter>
+      <is_default>0</is_default>
+      <weight>11</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>intervention</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Advocacy to immigration lawyers</label>
+      <value>12</value>
+      <name>Advocacy to immigration lawyers</name>
+      <filter>0</filter>
+      <is_default>0</is_default>
+      <weight>12</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>intervention</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Citizenship app support and information</label>
+      <value>13</value>
+      <name>Citizenship app support and information</name>
+      <filter>0</filter>
+      <is_default>0</is_default>
+      <weight>13</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>intervention</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Renew immigration permission</label>
+      <value>14</value>
+      <name>Renew immigration permission</name>
+      <filter>0</filter>
+      <is_default>0</is_default>
+      <weight>14</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>intervention</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Advocacy to Embassies</label>
+      <value>15</value>
+      <name>Advocacy to Embassies</name>
+      <filter>0</filter>
+      <is_default>0</is_default>
+      <weight>15</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>intervention</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Accompaniment to social protection/homeless appointments</label>
+      <value>16</value>
+      <name>Accompaniment to social protection/homeless appointments</name>
+      <filter>0</filter>
+      <is_default>0</is_default>
+      <weight>16</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>intervention</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Enabled access to Social protection</label>
+      <value>17</value>
+      <name>Enabled access to Social protection</name>
+      <filter>0</filter>
+      <is_default>0</is_default>
+      <weight>17</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>intervention</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Emergency needs support i.e. clothes, food</label>
+      <value>18</value>
+      <name>Emergency needs support i.e. clothes, food</name>
+      <filter>0</filter>
+      <is_default>0</is_default>
+      <weight>18</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>intervention</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Liaising with Local Authorities</label>
+      <value>19</value>
+      <name>Liaising with Local Authorities</name>
+      <filter>0</filter>
+      <is_default>0</is_default>
+      <weight>19</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>intervention</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Prevention of poverty related neglect</label>
+      <value>20</value>
+      <name>Prevention of poverty related neglect</name>
+      <filter>0</filter>
+      <is_default>0</is_default>
+      <weight>20</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>intervention</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Inclusion in LGBT community</label>
+      <value>21</value>
+      <name>Inclusion in LGBT community</name>
+      <filter>0</filter>
+      <is_default>0</is_default>
+      <weight>21</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>intervention</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Support with cultural needs</label>
+      <value>22</value>
+      <name>Support with cultural needs</name>
+      <filter>0</filter>
+      <is_default>0</is_default>
+      <weight>22</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>intervention</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Securing a medical card</label>
+      <value>23</value>
+      <name>Securing a medical card</name>
+      <filter>0</filter>
+      <is_default>0</is_default>
+      <weight>23</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>intervention</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Securing a PPS number/card</label>
+      <value>24</value>
+      <name>Securing a PPS number/card</name>
+      <filter>0</filter>
+      <is_default>0</is_default>
+      <weight>24</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>intervention</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Support with medical needs (i.e. non-medical card items-GP registration/accompaniment)</label>
+      <value>25</value>
+      <name>Support with medical needs (i.e. non-medical card items-GP registration/accompaniment)</name>
+      <filter>0</filter>
+      <is_default>0</is_default>
+      <weight>25</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>intervention</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Purchase of school materials</label>
+      <value>26</value>
+      <name>Purchase of school materials</name>
+      <filter>0</filter>
+      <is_default>0</is_default>
+      <weight>26</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>intervention</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>CV preparation, interview skills</label>
+      <value>27</value>
+      <name>CV preparation, interview skills</name>
+      <filter>0</filter>
+      <is_default>0</is_default>
+      <weight>27</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>intervention</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>New social supports/outlets</label>
+      <value>28</value>
+      <name>New social supports/outlets</name>
+      <filter>0</filter>
+      <is_default>0</is_default>
+      <weight>28</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>intervention</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Safe space to  discuss issues, risks &amp; concerns</label>
+      <value>29</value>
+      <name>Safe space to  discuss issues, risks &amp; concerns</name>
+      <filter>0</filter>
+      <is_default>0</is_default>
+      <weight>29</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>intervention</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Transitional support for DP leavers</label>
+      <value>30</value>
+      <name>Transitional support for DP leavers</name>
+      <filter>0</filter>
+      <is_default>0</is_default>
+      <weight>30</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>intervention</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Transitional support for Care leavers (post 18)</label>
+      <value>31</value>
+      <name>Transitional support for Care leavers (post 18)</name>
+      <filter>0</filter>
+      <is_default>0</is_default>
+      <weight>31</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>intervention</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Mental Health &amp; Counselling support</label>
+      <value>32</value>
+      <name>Mental Health &amp; Counselling support</name>
+      <filter>0</filter>
+      <is_default>0</is_default>
+      <weight>32</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>intervention</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Voluntary work and work placements</label>
+      <value>33</value>
+      <name>Voluntary work and work placements</name>
+      <filter>0</filter>
+      <is_default>0</is_default>
+      <weight>33</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>intervention</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Job search skills</label>
+      <value>34</value>
+      <name>Job search skills</name>
+      <filter>0</filter>
+      <is_default>0</is_default>
+      <weight>34</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>intervention</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Support to apply for employment to businesses</label>
+      <value>35</value>
+      <name>Support to apply for employment to businesses</name>
+      <filter>0</filter>
+      <is_default>0</is_default>
+      <weight>35</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>intervention</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Prevention of domestic violence</label>
+      <value>1</value>
+      <name>Prevention_of_domestic_violence</name>
+      <is_default>0</is_default>
+      <weight>1</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>outcomes</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Access to housing/ social welfare</label>
+      <value>2</value>
+      <name>Access_to_housing_social_welfar</name>
+      <is_default>0</is_default>
+      <weight>2</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>outcomes</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Enhanced communication and language acquisition skills</label>
+      <value>3</value>
+      <name>Enhanced_communication_and_lang</name>
+      <is_default>0</is_default>
+      <weight>3</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>outcomes</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Enhanced wellbeing and sense of safety</label>
+      <value>4</value>
+      <name>Enhanced_wellbeing_and_sense_of</name>
+      <is_default>0</is_default>
+      <weight>4</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>outcomes</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Regularisation and security of residency</label>
+      <value>5</value>
+      <name>Regularisation_and_security_of_</name>
+      <is_default>0</is_default>
+      <weight>5</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>outcomes</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Improved knowledge of and access to education for asylum seekers</label>
+      <value>6</value>
+      <name>Improved_knowledge_of_and_acces</name>
+      <is_default>0</is_default>
+      <weight>6</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>outcomes</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Self-advocacy skills</label>
+      <value>7</value>
+      <name>Self_advocacy_skills</name>
+      <is_default>0</is_default>
+      <weight>7</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>outcomes</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>improved knowledge of  immigration system</label>
+      <value>8</value>
+      <name>improved_knowledge_of_immigrati</name>
+      <is_default>0</is_default>
+      <weight>8</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>outcomes</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Greater sense of belonging and inclusion</label>
+      <value>9</value>
+      <name>Greater_sense_of_belonging_and_</name>
+      <is_default>0</is_default>
+      <weight>9</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>outcomes</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Greater autonomy , informed decision making</label>
+      <value>10</value>
+      <name>Greater_autonomy_informed_decis</name>
+      <is_default>0</is_default>
+      <weight>10</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>outcomes</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Prevention of poverty and homelessness</label>
+      <value>11</value>
+      <name>Prevention of poverty and homelessness</name>
+      <filter>0</filter>
+      <is_default>0</is_default>
+      <weight>11</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>outcomes</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Greater sense of inclusion and belonging</label>
+      <value>12</value>
+      <name>Greater sense of inclusion and belonging</name>
+      <filter>0</filter>
+      <is_default>0</is_default>
+      <weight>12</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>outcomes</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Improved access to employment</label>
+      <value>13</value>
+      <name>Improved access to employment</name>
+      <filter>0</filter>
+      <is_default>0</is_default>
+      <weight>13</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>outcomes</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Safeguarding and reduced risks of exploitation and abuse</label>
+      <value>14</value>
+      <name>Safeguarding and reduced risks of exploitation and abuse</name>
+      <filter>0</filter>
+      <is_default>0</is_default>
+      <weight>14</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>outcomes</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Improved links between young people and the community</label>
+      <value>15</value>
+      <name>Improved links between young people and the community</name>
+      <filter>0</filter>
+      <is_default>0</is_default>
+      <weight>15</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>outcomes</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Greater opportunities to integrate</label>
+      <value>16</value>
+      <name>Greater opportunities to integrate</name>
+      <filter>0</filter>
+      <is_default>0</is_default>
+      <weight>16</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>outcomes</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Education &amp; Career planning</label>
+      <value>17</value>
+      <name>Education &amp; Career planning</name>
+      <filter>0</filter>
+      <is_default>0</is_default>
+      <weight>17</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>outcomes</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Improved conditions in Direct Provision</label>
+      <value>18</value>
+      <name>Improved conditions in Direct Provision</name>
+      <filter>0</filter>
+      <is_default>0</is_default>
+      <weight>18</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>outcomes</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Prevention of homelessness</label>
+      <value>19</value>
+      <name>Prevention of homelessness</name>
+      <filter>0</filter>
+      <is_default>0</is_default>
+      <weight>19</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>outcomes</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Independent living skills</label>
+      <value>20</value>
+      <name>Independent living skills</name>
+      <filter>0</filter>
+      <is_default>0</is_default>
+      <weight>20</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>outcomes</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Increased Emotional Resilience</label>
+      <value>21</value>
+      <name>Increased Emotional Resilience</name>
+      <filter>0</filter>
+      <is_default>0</is_default>
+      <weight>21</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>outcomes</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>New skills</label>
+      <value>22</value>
+      <name>New skills</name>
+      <filter>0</filter>
+      <is_default>0</is_default>
+      <weight>22</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>outcomes</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Empowerment</label>
+      <value>23</value>
+      <name>Empowerment</name>
+      <filter>0</filter>
+      <is_default>0</is_default>
+      <weight>23</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>outcomes</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Felt listened to</label>
+      <value>24</value>
+      <name>Felt listened to</name>
+      <filter>0</filter>
+      <is_default>0</is_default>
+      <weight>24</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>outcomes</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Greater sense of self-worth</label>
+      <value>25</value>
+      <name>Greater sense of self-worth</name>
+      <filter>0</filter>
+      <is_default>0</is_default>
+      <weight>25</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>outcomes</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Greater sense of self-confidence and wellbeing</label>
+      <value>26</value>
+      <name>Greater sense of self-confidence and wellbeing</name>
+      <filter>0</filter>
+      <is_default>0</is_default>
+      <weight>26</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>outcomes</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Improved social development</label>
+      <value>27</value>
+      <name>Improved social development</name>
+      <filter>0</filter>
+      <is_default>0</is_default>
+      <weight>27</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>outcomes</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>More positive outlook for the future</label>
+      <value>28</value>
+      <name>More positive outlook for the future</name>
+      <filter>0</filter>
+      <is_default>0</is_default>
+      <weight>28</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>outcomes</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Understanding of the immigration system</label>
+      <value>29</value>
+      <name>Understanding of the immigration system</name>
+      <filter>0</filter>
+      <is_default>0</is_default>
+      <weight>29</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>outcomes</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Informed decision making</label>
+      <value>30</value>
+      <name>Informed decision making</name>
+      <filter>0</filter>
+      <is_default>0</is_default>
+      <weight>30</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>outcomes</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>More integrated</label>
+      <value>31</value>
+      <name>More integrated</name>
+      <filter>0</filter>
+      <is_default>0</is_default>
+      <weight>31</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>outcomes</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Increased participation in the immigration process</label>
+      <value>32</value>
+      <name>Increased participation in the immigration process</name>
+      <filter>0</filter>
+      <is_default>0</is_default>
+      <weight>32</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>outcomes</option_group_name>
+    </OptionValue>
+    <OptionValue>
+      <label>Trusted relationships &amp; Boundaries</label>
+      <value>33</value>
+      <name>Trusted relationships &amp; Boundaries</name>
+      <filter>0</filter>
+      <is_default>0</is_default>
+      <weight>33</weight>
+      <is_optgroup>0</is_optgroup>
+      <is_reserved>0</is_reserved>
+      <is_active>1</is_active>
+      <option_group_name>outcomes</option_group_name>
+    </OptionValue>
+  </OptionValues>
+</CustomData>

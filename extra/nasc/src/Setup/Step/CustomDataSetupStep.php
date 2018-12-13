@@ -39,5 +39,6 @@ class CustomDataSetupStep implements StepInterface
     public function remove()
     {
         $this->customGroupService->deleteByName('Additional_Contact_Information');
+        $this->customGroupService->deleteByName('Contact_Log_Information');
     }
 }
