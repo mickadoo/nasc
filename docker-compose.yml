@@ -32,18 +32,6 @@ services:
       - mysql:/var/lib/mysql
     restart: always
 
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    ports:
-      - "8081:80"
-    links:
-      - mysql
-    environment:
-      PMA_HOST: mysql
-      PMA_USER: root
-      PMA_PASSWORD: buildkit
-    restart: always
-
   maildev:
     image: djfarrelly/maildev
     ports:
