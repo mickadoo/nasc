@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="Nasc\Setup\Step\CustomDataSetupStep" class="Nasc\Setup\Step\CustomDataSetupStep">
+            <argument type="service" id="CRM_Utils_Migrate_Import"/>
+            <argument type="service" id="Nasc\Service\CustomGroupService"/>
+        </service>
+        <service id="Nasc\Service\CustomGroupService" class="Nasc\Service\CustomGroupService">
+            <argument type="service" id="Nasc\Repo\CustomGroupRepo"/>
+            <argument type="service" id="Nasc\Repo\CustomFieldRepo"/>
+        </service>
+        <service id="Nasc\Service\CustomFieldService" class="Nasc\Service\CustomFieldService">
+            <argument type="service" id="Nasc\Repo\CustomFieldRepo"/>
+            <argument type="service" id="Nasc\Repo\CustomGroupRepo"/>
+        </service>
+        <service id="CRM_Utils_Migrate_Import" class="CRM_Utils_Migrate_Import"/>
+        <service id="Nasc\Repo\CustomGroupRepo" class="Nasc\Repo\CustomGroupRepo"/>
+        <service id="Nasc\Repo\CustomFieldRepo" class="Nasc\Repo\CustomFieldRepo"/>
+    </services>
+</container>

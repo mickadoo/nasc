@@ -1,6 +1,13 @@
 <?php
 
 use Composer\Autoload\ClassLoader;
+use Nasc\Setup\Step;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\Config\FileLocator;
+
+const NASC_EXT_ROOT = __DIR__;
 
 /**
  * Implements hook_civicrm_config().
@@ -27,6 +34,15 @@ function nasc_civicrm_install()
  */
 function nasc_civicrm_postInstall()
 {
+    $container = get_nasc_only_container();
+    $steps = [
+        $container->get(Step\CustomDataSetupStep::class),
+    ];
+
+    /** @var Step\StepInterface $step */
+    foreach ($steps as $step) {
+        $step->apply();
+    }
 }
 
 /**
@@ -35,6 +51,16 @@ function nasc_civicrm_postInstall()
 function nasc_civicrm_uninstall()
 {
     _nasc_register_autoloader();
+    $container = get_nasc_only_container();
+
+    $steps = [
+        $container->get(Step\CustomDataSetupStep::class),
+    ];
+
+    /** @var Step\StepInterface $step */
+    foreach ($steps as $step) {
+        $step->remove();
+    }
 }
 
 /**
@@ -61,6 +87,41 @@ function nasc_civicrm_disable()
 function nasc_civicrm_upgrade($op, CRM_Queue_Queue $queue = null)
 {
 
+}
+
+/**
+ * Implements hook_civicrm_container().
+ *
+ * @param ContainerBuilder $container
+ */
+function nasc_civicrm_container($container)
+{
+    $builder = get_nasc_container_builder();
+    $container->merge($builder);
+}
+
+/**
+ * @return ContainerBuilder
+ */
+function get_nasc_container_builder() {
+    $builder =  new ContainerBuilder();
+    $loader = new XmlFileLoader(
+        $builder,
+        new FileLocator(__DIR__.'/config')
+    );
+    $loader->load('services.xml');
+
+    return $builder;
+}
+
+/**
+ * @return ContainerInterface
+ */
+function get_nasc_only_container() {
+    $container = get_nasc_container_builder();
+    $container->compile();
+
+    return $container;
 }
 
 function _nasc_register_autoloader()
