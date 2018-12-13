@@ -27,9 +27,7 @@ function nasc_civicrm_config()
 function nasc_civicrm_postInstall()
 {
     $container = get_nasc_only_container();
-    $steps = [
-        $container->get(Step\CustomDataSetupStep::class),
-    ];
+    $steps = nasc_get_setup_steps($container);
 
     /** @var Step\StepInterface $step */
     foreach ($steps as $step) {
@@ -44,15 +42,28 @@ function nasc_civicrm_uninstall()
 {
     _nasc_register_autoloader();
     $container = get_nasc_only_container();
-
-    $steps = [
-        $container->get(Step\CustomDataSetupStep::class),
-    ];
+    $steps = nasc_get_setup_steps($container);
 
     /** @var Step\StepInterface $step */
     foreach ($steps as $step) {
         $step->remove();
     }
+}
+
+function nasc_get_setup_steps(ContainerInterface $container)
+{
+    $stepFiles = glob(NASC_EXT_ROOT . '/src/Setup/Step/*.php');
+    $steps = [];
+    $namespace = 'Nasc\Setup\Step\\';
+    $exclude = ['StepInterface'];
+    foreach ($stepFiles as $fileName) {
+        $basename = substr(basename($fileName), 0, -4);
+        if (!in_array($basename, $exclude)) {
+            $steps[] = $container->get($namespace . $basename);
+        }
+    }
+
+    return $steps;
 }
 
 /**
