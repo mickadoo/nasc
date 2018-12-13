@@ -22,14 +22,6 @@ function nasc_civicrm_config()
 }
 
 /**
- * Implements hook_civicrm_install().
- */
-function nasc_civicrm_install()
-{
-    _nasc_register_autoloader();
-}
-
-/**
  * Implements hook_civicrm_postInstall().
  */
 function nasc_civicrm_postInstall()
@@ -61,32 +53,6 @@ function nasc_civicrm_uninstall()
     foreach ($steps as $step) {
         $step->remove();
     }
-}
-
-/**
- * Implements hook_civicrm_enable().
- */
-function nasc_civicrm_enable()
-{
-    _nasc_register_autoloader();
-}
-
-/**
- * Implements hook_civicrm_disable().
- */
-function nasc_civicrm_disable()
-{
-}
-
-/**
- * Implements hook_civicrm_upgrade().
- *
- * @param string $op
- * @param CRM_Queue_Queue $queue
- */
-function nasc_civicrm_upgrade($op, CRM_Queue_Queue $queue = null)
-{
-
 }
 
 /**
