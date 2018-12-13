@@ -27,13 +27,13 @@ class CustomFieldService
         $this->groupRepo = $groupRepo;
     }
 
-    public function findAllByGroupName(string $groupName) : array
+    public function findAllByGroupName(string $groupName): array
     {
         $group = $this->groupRepo->findOneBy(['name' => $groupName]);
         if (!$group) {
             return [];
         }
 
-        return $this->fieldRepo->findByGroup((int) $group['id']);
+        return $this->fieldRepo->findByGroup((int)$group['id']);
     }
 }

@@ -11,19 +11,19 @@
         syntaxCheck="false"
         bootstrap="tests/bootstrap.php"
 >
-  <testsuites>
-    <testsuite name="All Tests">
-      <directory>./tests</directory>
-    </testsuite>
-  </testsuites>
-  <filter>
-    <whitelist>
-      <directory suffix=".php">./</directory>
-    </whitelist>
-  </filter>
-  <listeners>
-    <listener class="Civi\Test\CiviTestListener">
-      <arguments/>
-    </listener>
-  </listeners>
+    <testsuites>
+        <testsuite name="All Tests">
+            <directory>./tests</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist>
+            <directory suffix=".php">./</directory>
+        </whitelist>
+    </filter>
+    <listeners>
+        <listener class="Civi\Test\CiviTestListener">
+            <arguments/>
+        </listener>
+    </listeners>
 </phpunit>

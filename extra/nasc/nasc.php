@@ -103,11 +103,12 @@ function nasc_civicrm_container($container)
 /**
  * @return ContainerBuilder
  */
-function get_nasc_container_builder() {
-    $builder =  new ContainerBuilder();
+function get_nasc_container_builder()
+{
+    $builder = new ContainerBuilder();
     $loader = new XmlFileLoader(
         $builder,
-        new FileLocator(__DIR__.'/config')
+        new FileLocator(__DIR__ . '/config')
     );
     $loader->load('services.xml');
 
@@ -117,7 +118,8 @@ function get_nasc_container_builder() {
 /**
  * @return ContainerInterface
  */
-function get_nasc_only_container() {
+function get_nasc_only_container()
+{
     $container = get_nasc_container_builder();
     $container->compile();
 

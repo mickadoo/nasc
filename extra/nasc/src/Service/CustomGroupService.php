@@ -31,7 +31,7 @@ class CustomGroupService
     {
         $group = $this->groupRepo->findOneBy(['name' => $name]);
         if ($group) {
-            $this->delete((int) $group['id']);
+            $this->delete((int)$group['id']);
         }
     }
 
@@ -39,7 +39,7 @@ class CustomGroupService
     {
         $fields = $this->fieldRepo->findBy(['custom_group_id' => $id]);
         foreach ($fields as $field) {
-            $this->fieldRepo->delete((int) $field['id']);
+            $this->fieldRepo->delete((int)$field['id']);
         }
         $this->groupRepo->delete($id);
     }
