@@ -6,6 +6,13 @@
             <argument type="service" id="CRM_Utils_Migrate_Import"/>
             <argument type="service" id="Nasc\Service\CustomGroupService"/>
         </service>
+        <service id="Nasc\Setup\Step\NascSiteConfigurationSetup" class="Nasc\Setup\Step\NascSiteConfigurationSetup">
+            <argument type="service" id="Nasc\Repo\CountryRepo"/>
+            <argument type="service" id="Nasc\Repo\StateProvinceRepo"/>
+            <argument type="service" id="Nasc\Repo\SettingRepo"/>
+            <argument type="service" id="Nasc\Repo\DomainRepo"/>
+            <argument type="service" id="Nasc\Service\DrupalSettingService"/>
+        </service>
         <service id="Nasc\Service\CustomGroupService" class="Nasc\Service\CustomGroupService">
             <argument type="service" id="Nasc\Repo\CustomGroupRepo"/>
             <argument type="service" id="Nasc\Repo\CustomFieldRepo"/>
@@ -15,7 +22,12 @@
             <argument type="service" id="Nasc\Repo\CustomGroupRepo"/>
         </service>
         <service id="CRM_Utils_Migrate_Import" class="CRM_Utils_Migrate_Import"/>
+        <service id="Nasc\Service\DrupalSettingService" class="Nasc\Service\DrupalSettingService"/>
         <service id="Nasc\Repo\CustomGroupRepo" class="Nasc\Repo\CustomGroupRepo"/>
         <service id="Nasc\Repo\CustomFieldRepo" class="Nasc\Repo\CustomFieldRepo"/>
+        <service id="Nasc\Repo\DomainRepo" class="Nasc\Repo\DomainRepo"/>
+        <service id="Nasc\Repo\CountryRepo" class="Nasc\Repo\CountryRepo"/>
+        <service id="Nasc\Repo\SettingRepo" class="Nasc\Repo\SettingRepo"/>
+        <service id="Nasc\Repo\StateProvinceRepo" class="Nasc\Repo\StateProvinceRepo"/>
     </services>
 </container>

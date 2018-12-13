@@ -25,6 +25,11 @@ class AbstractRepo
         civicrm_api3($this->getEntityName(), 'delete', ['id' => $id]);
     }
 
+    public function create(array $params): array
+    {
+        return civicrm_api3($this->getEntityName(), 'create', $params);
+    }
+
     /**
      * Determines the entity name to use for CiviCRM API calls. By default gets name from repo classname
      *
