@@ -59,7 +59,7 @@ class NascSiteConfigurationSetup implements StepInterface
     public function apply()
     {
         $irelandId = $this->countryRepo->findOneBy(['name' => 'Ireland'])['id'];
-        $corkId = $this->stateRepo->findOneBy(['name' => 'Cork', 'country_id' => $irelandId]);
+        $corkId = $this->stateRepo->findOneBy(['name' => 'Cork', 'country_id' => $irelandId])['id'];
 
         $settingParams = [
             "defaultCurrency" => "EUR",
