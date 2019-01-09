@@ -2,6 +2,7 @@
 
 namespace Nasc\Setup\Step;
 
+use Nasc\Repo\CustomFieldRepo;
 use Nasc\Service\CustomGroupService;
 
 class CustomDataSetupStep implements StepInterface
@@ -17,13 +18,23 @@ class CustomDataSetupStep implements StepInterface
     private $customGroupService;
 
     /**
+     * @var CustomFieldRepo
+     */
+    private $customFieldRepo;
+
+    /**
      * @param \CRM_Utils_Migrate_Import $importer
      * @param CustomGroupService $customGroupService
+     * @param CustomFieldRepo $customFieldRepo
      */
-    public function __construct(\CRM_Utils_Migrate_Import $importer, CustomGroupService $customGroupService)
-    {
+    public function __construct(
+        \CRM_Utils_Migrate_Import $importer,
+        CustomGroupService $customGroupService,
+        CustomFieldRepo $customFieldRepo
+    ) {
         $this->importer = $importer;
         $this->customGroupService = $customGroupService;
+        $this->customFieldRepo = $customFieldRepo;
     }
 
     public function apply()
@@ -34,11 +45,26 @@ class CustomDataSetupStep implements StepInterface
                 $this->importer->run($file);
             }
         }
+
+        $this->fixLinkToLanguagesOptionGroup();
     }
 
     public function remove()
     {
         $this->customGroupService->deleteByName('Additional_Contact_Information');
         $this->customGroupService->deleteByName('Contact_Log_Information');
+    }
+
+    /**
+     * When importing using a system option group it seems that Civi will not set it correctly
+     */
+    private function fixLinkToLanguagesOptionGroup()
+    {
+        $field = $this->customFieldRepo->findOneBy(['name' => 'Spoken_Languages']);
+        if (!$field) {
+            return;
+        }
+        $field['option_group_id'] = 'languages';
+        $this->customFieldRepo->create($field);
     }
 }

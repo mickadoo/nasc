@@ -5,6 +5,7 @@
         <service id="Nasc\Setup\Step\CustomDataSetupStep" class="Nasc\Setup\Step\CustomDataSetupStep">
             <argument type="service" id="CRM_Utils_Migrate_Import"/>
             <argument type="service" id="Nasc\Service\CustomGroupService"/>
+            <argument type="service" id="Nasc\Repo\CustomFieldRepo"/>
         </service>
         <service id="Nasc\Setup\Step\NascSiteConfigurationSetup" class="Nasc\Setup\Step\NascSiteConfigurationSetup">
             <argument type="service" id="Nasc\Repo\CountryRepo"/>
@@ -20,12 +21,14 @@
             <argument type="service" id="Nasc\Repo\CustomGroupRepo"/>
             <argument type="service" id="Nasc\Repo\CustomFieldRepo"/>
             <argument type="service" id="Nasc\Repo\OptionGroupRepo"/>
+            <argument type="service" id="Nasc\Service\DirectQueryService"/>
         </service>
         <service id="Nasc\Service\CustomFieldService" class="Nasc\Service\CustomFieldService">
             <argument type="service" id="Nasc\Repo\CustomFieldRepo"/>
             <argument type="service" id="Nasc\Repo\CustomGroupRepo"/>
         </service>
         <service id="CRM_Utils_Migrate_Import" class="CRM_Utils_Migrate_Import"/>
+        <service id="Nasc\Service\DirectQueryService" class="Nasc\Service\DirectQueryService"/>
         <service id="Nasc\Service\DrupalSettingService" class="Nasc\Service\DrupalSettingService"/>
         <service id="Nasc\Repo\CustomGroupRepo" class="Nasc\Repo\CustomGroupRepo"/>
         <service id="Nasc\Repo\CustomFieldRepo" class="Nasc\Repo\CustomFieldRepo"/>
