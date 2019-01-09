@@ -24,18 +24,26 @@ class CustomGroupService
     private $optionGroupRepo;
 
     /**
+     * @var DirectQueryService
+     */
+    private $directQueryService;
+
+    /**
      * @param CustomGroupRepo $groupRepo
      * @param CustomFieldRepo $fieldRepo
      * @param OptionGroupRepo $optionGroupRepo
+     * @param DirectQueryService $directQueryService
      */
     public function __construct(
         CustomGroupRepo $groupRepo,
         CustomFieldRepo $fieldRepo,
-        OptionGroupRepo $optionGroupRepo
+        OptionGroupRepo $optionGroupRepo,
+        DirectQueryService $directQueryService
     ) {
         $this->groupRepo = $groupRepo;
         $this->fieldRepo = $fieldRepo;
         $this->optionGroupRepo = $optionGroupRepo;
+        $this->directQueryService = $directQueryService;
     }
 
     public function deleteByName(string $name)
@@ -58,7 +66,7 @@ class CustomGroupService
 
     private function ensureNonDeletionOfSystemGroups(array $field)
     {
-        $optionGroupId = $field['option_group_id'];
+        $optionGroupId = $field['option_group_id'] ?? null;
         if (!$optionGroupId) {
             return;
         }
@@ -70,6 +78,8 @@ class CustomGroupService
         }
 
         // set the option group ID to null so it won't be deleted when we delete the field
-        $this->fieldRepo->create(['id' => $field['id'], 'option_group_id' => null]);
+        // attempts to do this using the API failed, so resorting to direct query :-(
+        $sql = sprintf('UPDATE civicrm_custom_field SET option_group_id = NULL WHERE id = %d', $field['id']);
+        $this->directQueryService->runDirectQuery($sql);
     }
 }
