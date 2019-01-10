@@ -46,16 +46,25 @@ class CRM_Nasc_Form_Report_InterventionReport extends CRM_Report_Form
                 ],
                 'filters' => [
                     'option_group_id' => [
-                        'title' => ts('Option Group ID'),
                         'type' => CRM_Utils_Type::T_STRING,
-                        'operatorType' => CRM_Report_Form::OP_STRING,
                         'default' => $interventionGroup['id'],
                         'no_display' => TRUE,
+                    ],
+                    'activity_date' => [
+                        'title' => 'Activity Date',
+                        'type' => CRM_Utils_Type::T_DATE,
                     ],
                 ],
                 'order_bys' => [],
             ],
         ];
+    }
+
+    public function postProcess()
+    {
+        // need to unset this as it's not a real filter
+        unset($this->_columns['civicrm_option_value']['filters']['activity_date']);
+        parent::postProcess();
     }
 
     public function from() {
@@ -99,7 +108,8 @@ class CRM_Nasc_Form_Report_InterventionReport extends CRM_Report_Form
         foreach ($rows as &$row) {
             $interventionVal = (int) $row['civicrm_option_value_value'];
             if (isset($interventionToOutcomeMapping[$interventionVal])) {
-                $row[self::COL_KEY_OUTCOMES] = $this->formatOutcomesForRow($interventionToOutcomeMapping[$interventionVal]);
+                $outcomesRaw = $interventionToOutcomeMapping[$interventionVal];
+                $row[self::COL_KEY_OUTCOMES] = $this->formatOutcomesForRow($outcomesRaw);
             } else {
                 $row[self::COL_KEY_OUTCOMES] = 'none';
             }
@@ -159,10 +169,14 @@ class CRM_Nasc_Form_Report_InterventionReport extends CRM_Report_Form
         $interventionKey = $this->getKeyForCustomField('Intervention');
         $outcomeKey = $this->getKeyForCustomField('Outcomes');
 
-        return civicrm_api3('Activity', 'get', [
+        $params = [
             'return' => [$interventionKey, $outcomeKey, 'source_contact_id', 'target_contact_id'],
             $interventionKey => ['IS NOT NULL' => 1],
-        ])['values'];
+        ];
+
+        $this->addDateParams($params);
+
+        return civicrm_api3('Activity', 'get', $params)['values'];
     }
 
     private function getKeyForCustomField($fieldName)
@@ -200,5 +214,40 @@ class CRM_Nasc_Form_Report_InterventionReport extends CRM_Report_Form
         }
 
         return $interventionRecipients;
+    }
+
+    /**
+     * @param array $params
+     */
+    private function addDateParams(array &$params): void
+    {
+        $formParams = $this->getParams();
+        $fromDateKey = 'activity_date_from';
+        $toDateKey = 'activity_date_to';
+        $relativeDateKey = 'activity_date_relative';
+
+        $from = null;
+        $to = null;
+
+        if (!empty($formParams[$relativeDateKey])) {
+            $relativeDate = explode('.', $formParams[$relativeDateKey]);
+            $date = CRM_Utils_Date::relativeToAbsolute($relativeDate[0], $relativeDate[1]);
+            $from = substr($date['from'], 0, 8) . ' 00:00:00';
+            $to = substr($date['to'], 0, 8) . ' 23:59:59';
+        }
+        if (!empty($formParams[$fromDateKey])) {
+            $from = $formParams[$fromDateKey];
+        }
+        if (!empty($formParams[$toDateKey])) {
+            $to = $formParams[$toDateKey];
+        }
+
+        if (isset($from, $to)) {
+            $params['activity_date_time'] = ['BETWEEN' => [$from, $to]];
+        } elseif (isset($from)) {
+            $params['activity_date_time'] = ['>=' => $from];
+        } elseif (isset($to)) {
+            $params['activity_date_time'] = ['<=' => $to];
+        }
     }
 }
