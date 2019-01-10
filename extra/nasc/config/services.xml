@@ -38,5 +38,6 @@
         <service id="Nasc\Repo\StateProvinceRepo" class="Nasc\Repo\StateProvinceRepo"/>
         <service id="Nasc\Repo\OptionGroupRepo" class="Nasc\Repo\OptionGroupRepo"/>
         <service id="Nasc\Repo\ContactTypeRepo" class="Nasc\Repo\ContactTypeRepo"/>
+        <service id="Nasc\Repo\OptionValueRepo" class="Nasc\Repo\OptionValueRepo"/>
     </services>
 </container>
