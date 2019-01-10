@@ -110,3 +110,19 @@ function _nasc_register_autoloader()
     $autoloader = require $civicrm_root . '/vendor/autoload.php';
     $autoloader->addPsr4('Nasc\\', __DIR__ . '/src');
 }
+
+function nasc_civicrm_managed(&$entities)
+{
+    $mgdFiles = [
+        __DIR__ . '/CRM/Nasc/Form/Report/InterventionReport.mgd.php'
+    ];
+    foreach ($mgdFiles as $file) {
+        $es = include $file;
+        foreach ($es as $e) {
+            if (empty($e['module'])) {
+                $e['module'] = 'nasc';
+            }
+            $entities[] = $e;
+        }
+    }
+}
