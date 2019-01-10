@@ -130,10 +130,10 @@ class CRM_Nasc_Form_Report_InterventionReport extends CRM_Report_Form
 
         $output = "";
         foreach ($outcomesRaw as $outcomeVal => $count) {
-            $output .= sprintf('%s (%d),', $getOutcomeLabelByVal($outcomeVal), $count);
+            $output .= sprintf('%s (%d), ', $getOutcomeLabelByVal($outcomeVal), $count);
         }
 
-        return rtrim($output, ',');
+        return rtrim($output, ', ');
     }
 
     private function getOutcomeOptions() : array
