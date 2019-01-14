@@ -17,6 +17,10 @@
         <service id="Nasc\Setup\Step\ContactSubtypeSetupStep" class="Nasc\Setup\Step\ContactSubtypeSetupStep">
             <argument type="service" id="Nasc\Repo\ContactTypeRepo"/>
         </service>
+        <service id="Nasc\Setup\Step\ReportCreationStep" class="Nasc\Setup\Step\ReportCreationStep">
+            <argument type="service" id="Nasc\Repo\OptionValueRepo"/>
+            <argument type="service" id="Nasc\Repo\ReportInstanceRepo"/>
+        </service>
         <service id="Nasc\Service\CustomGroupService" class="Nasc\Service\CustomGroupService">
             <argument type="service" id="Nasc\Repo\CustomGroupRepo"/>
             <argument type="service" id="Nasc\Repo\CustomFieldRepo"/>
@@ -39,5 +43,6 @@
         <service id="Nasc\Repo\OptionGroupRepo" class="Nasc\Repo\OptionGroupRepo"/>
         <service id="Nasc\Repo\ContactTypeRepo" class="Nasc\Repo\ContactTypeRepo"/>
         <service id="Nasc\Repo\OptionValueRepo" class="Nasc\Repo\OptionValueRepo"/>
+        <service id="Nasc\Repo\ReportInstanceRepo" class="Nasc\Repo\ReportInstanceRepo"/>
     </services>
 </container>
