@@ -22,6 +22,7 @@
             <argument type="service" id="Nasc\Repo\ReportInstanceRepo"/>
             <argument type="service" id="Nasc\Repo\NavigationRepo"/>
             <argument type="service" id="Nasc\Repo\OptionGroupRepo"/>
+            <argument type="service" id="Nasc\Repo\DashboardRepo"/>
         </service>
         <service id="Nasc\Service\CustomGroupService" class="Nasc\Service\CustomGroupService">
             <argument type="service" id="Nasc\Repo\CustomGroupRepo"/>
@@ -47,5 +48,6 @@
         <service id="Nasc\Repo\OptionValueRepo" class="Nasc\Repo\OptionValueRepo"/>
         <service id="Nasc\Repo\ReportInstanceRepo" class="Nasc\Repo\ReportInstanceRepo"/>
         <service id="Nasc\Repo\NavigationRepo" class="Nasc\Repo\NavigationRepo"/>
+        <service id="Nasc\Repo\DashboardRepo" class="Nasc\Repo\DashboardRepo"/>
     </services>
 </container>

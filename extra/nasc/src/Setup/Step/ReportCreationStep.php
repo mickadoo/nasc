@@ -2,6 +2,7 @@
 
 namespace Nasc\Setup\Step;
 
+use Nasc\Repo\DashboardRepo;
 use Nasc\Repo\NavigationRepo;
 use Nasc\Repo\OptionGroupRepo;
 use Nasc\Repo\OptionValueRepo;
@@ -31,21 +32,29 @@ class ReportCreationStep implements StepInterface
     private $optionGroupRepo;
 
     /**
+     * @var DashboardRepo
+     */
+    private $dashboardRepo;
+
+    /**
      * @param OptionValueRepo $optionValueRepo
      * @param ReportInstanceRepo $reportInstanceRepo
      * @param NavigationRepo $navigationRepo
      * @param OptionGroupRepo $optionGroupRepo
+     * @param DashboardRepo $dashboardRepo
      */
     public function __construct(
         OptionValueRepo $optionValueRepo,
         ReportInstanceRepo $reportInstanceRepo,
         NavigationRepo $navigationRepo,
-        OptionGroupRepo $optionGroupRepo
+        OptionGroupRepo $optionGroupRepo,
+        DashboardRepo $dashboardRepo
     ) {
         $this->optionValueRepo = $optionValueRepo;
         $this->reportInstanceRepo = $reportInstanceRepo;
         $this->navigationRepo = $navigationRepo;
         $this->optionGroupRepo = $optionGroupRepo;
+        $this->dashboardRepo = $dashboardRepo;
     }
 
     public function apply()
@@ -73,6 +82,11 @@ class ReportCreationStep implements StepInterface
         if ($navigation) {
             $this->navigationRepo->delete($navigation['id']);
         }
+
+        $dashboard = $this->getDashboardEntry();
+        if ($dashboard) {
+            $this->dashboardRepo->delete($dashboard['id']);
+        }
     }
 
     private function createReportInstance($template)
@@ -88,6 +102,13 @@ class ReportCreationStep implements StepInterface
 
         $interventionGroup = $this->optionGroupRepo->findOneBy(['name' => 'intervention']);
 
+        $instance = $this->reportInstanceRepo->create([
+            'report_id' => $template['value'],
+            'title' => 'NASC Monthly Intervention Report',
+            'description' => 'Summary of interventions this month',
+            'permission' => 'view all contacts',
+        ]);
+
         $formVals = [
             'fields' => [
                 'label' => 1,
@@ -97,20 +118,46 @@ class ReportCreationStep implements StepInterface
             'option_group_id_op' => 'has',
             'option_group_id_value' => $interventionGroup['id'],
             'activity_date_relative' => 'this.month',
-            'is_navigation' => 1,
             'view_mode' => 'view',
+            'cache_minutes' => 60,
             'addToDashboard' => 1,
+            'permission' => 'view all contacts',
+            'parent_id' => 0,
+            'instance_id' => $instance['id'],
         ];
 
-        $instance = $this->reportInstanceRepo->create([
-            'report_id' => $template['value'],
-            'title' => 'NASC Monthly Intervention Report',
-            'description' => 'Summary of interventions this month',
-            'permission' => 'view all contacts',
+        $this->reportInstanceRepo->create([
+            'id' => $instance['id'],
             'form_values' => serialize($formVals)
         ]);
 
         $this->createNavigation($instance['id']);
+        $this->createDashboardEntry($instance['id']);
+    }
+
+    private function createDashboardEntry($instanceId)
+    {
+        $existing = $this->getDashboardEntry();
+        if ($existing) {
+            return;
+        }
+
+        $params = [
+            'name' => 'nasc_monthly_intervention_report',
+            'label' => 'NASC Monthly Intervention Report',
+            'url' => sprintf('civicrm/report/instance/%d?reset=1&section=2&context=dashlet', $instanceId),
+            'permission' => 'view all contacts',
+            'fullscreen_url' => sprintf('civicrm/report/instance/%d?reset=1&section=2&context=dashletFullscreen', $instanceId),
+            'is_active' => 1,
+            'cache_minutes' => 60
+        ];
+
+        $this->dashboardRepo->create($params);
+    }
+
+    private function getDashboardEntry()
+    {
+        return $this->dashboardRepo->findOneBy(['name' => 'nasc_monthly_intervention_report']);
     }
 
     private function createNavigation($instanceId)
