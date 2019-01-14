@@ -68,6 +68,11 @@ class ReportCreationStep implements StepInterface
         foreach ($instances as $instance) {
             $this->reportInstanceRepo->delete($instance['id']);
         }
+
+        $navigation = $this->findNavigation();
+        if ($navigation) {
+            $this->navigationRepo->delete($navigation['id']);
+        }
     }
 
     private function createReportInstance($template)
@@ -110,6 +115,11 @@ class ReportCreationStep implements StepInterface
 
     private function createNavigation($instanceId)
     {
+        $existing = $this->findNavigation();
+        if ($existing) {
+            return;
+        }
+
         $this->navigationRepo->create([
             'parent_id' => 'Reports',
             'name' => 'NASC Monthly Intervention Report',
@@ -117,6 +127,11 @@ class ReportCreationStep implements StepInterface
             'url' => sprintf('civicrm/report/instance/%d?reset=1&force=1', $instanceId),
             'is_active' => 1,
         ]);
+    }
+
+    private function findNavigation()
+    {
+        return $this->navigationRepo->findOneBy(['name' => 'NASC Monthly Intervention Report']);
     }
 
     private function createReportTemplate()
