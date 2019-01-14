@@ -37,6 +37,6 @@ class AbstractRepo
      */
     public function getEntityName(): string
     {
-        return str_replace([__NAMESPACE__ . '\\', 'Repo'], '', get_called_class());
+        return substr(str_replace(__NAMESPACE__ . '\\', '', get_called_class()), 0, -4);
     }
 }
