@@ -90,7 +90,7 @@ class CRM_Nasc_Form_Report_InterventionReport extends CRM_Report_Form
         $interventionToOutcomeMapping = [];
 
         foreach ($activities as $activity) {
-            $activityInterventions = $activity[$interventionKey];
+            $activityInterventions = empty($activity[$interventionKey]) ? [] : $activity[$interventionKey];
             $activityOutcomes = $activity[$outcomeKey];
             foreach ($activityInterventions as $interventionVal) {
                 if (!isset($interventionToOutcomeMapping[$interventionVal])) {
@@ -199,7 +199,7 @@ class CRM_Nasc_Form_Report_InterventionReport extends CRM_Report_Form
         $interventionKey = $this->getKeyForCustomField('Intervention');
 
         foreach ($activities as $activity) {
-            $activityInterventions = $activity[$interventionKey];
+            $activityInterventions = empty($activity[$interventionKey]) ? [] : $activity[$interventionKey];
             $attendeeIds = $activity['target_contact_id'];
             foreach ($activityInterventions as $interventionVal) {
                 if (!isset($interventionRecipients[$interventionVal])) {
