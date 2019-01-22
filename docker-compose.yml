@@ -22,7 +22,6 @@ services:
       - drush-cache:/buildkit/.drush
       - npm-cache:/buildkit/.npm
       - git-cache:/buildkit/app/tmp/git-cache
-    restart: always
 
   mysql:
     image: mysql:5.7
@@ -32,7 +31,6 @@ services:
       MYSQL_ROOT_PASSWORD: buildkit
     volumes:
       - mysql:/var/lib/mysql
-    restart: always
 
 volumes:
   amp:

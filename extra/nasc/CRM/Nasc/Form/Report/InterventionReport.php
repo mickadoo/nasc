@@ -90,25 +90,42 @@ class CRM_Nasc_Form_Report_InterventionReport extends CRM_Report_Form
         $interventionToOutcomeMapping = [];
 
         foreach ($activities as $activity) {
-            $activityInterventions = empty($activity[$interventionKey]) ? [] : $activity[$interventionKey];
+            $intervention = $activity[$interventionKey] ?? null;
+            if (!$intervention) {
+                continue;
+            }
             $activityOutcomes = $activity[$outcomeKey];
-            foreach ($activityInterventions as $interventionVal) {
-                if (!isset($interventionToOutcomeMapping[$interventionVal])) {
-                    $interventionToOutcomeMapping[$interventionVal] = [];
+            if (!isset($interventionToOutcomeMapping[$intervention])) {
+                $interventionToOutcomeMapping[$intervention] = [];
+            }
+            foreach ($activityOutcomes as $outcomeVal) {
+                if (!isset($interventionToOutcomeMapping[$intervention][$outcomeVal])) {
+                    $interventionToOutcomeMapping[$intervention][$outcomeVal] = [];
                 }
-                foreach ($activityOutcomes as $outcomeVal) {
-                    if (!isset($interventionToOutcomeMapping[$interventionVal][$outcomeVal])) {
-                        $interventionToOutcomeMapping[$interventionVal][$outcomeVal] = 0;
+
+                $attendeeIds = $activity['target_contact_id'];
+                foreach ($attendeeIds as $attendeeId) {
+                    // only count each attendee once for an outcome for an intervention
+                    if (!in_array($attendeeId, $interventionToOutcomeMapping[$intervention][$outcomeVal])) {
+                        $interventionToOutcomeMapping[$intervention][$outcomeVal][] = $attendeeId;
                     }
-                    $interventionToOutcomeMapping[$interventionVal][$outcomeVal]++;
                 }
             }
         }
 
+        // count up the totals for each intervention
+        $interventionToOutcomeCount = [];
+        foreach ($interventionToOutcomeMapping as $intervention => $outcomes) {
+            $interventionToOutcomeCount[$intervention] = [];
+            foreach ($outcomes as $outcome => $outcomeRecipients) {
+                $interventionToOutcomeCount[$intervention][$outcome] = count($outcomeRecipients);
+            }
+        }
+
         foreach ($rows as &$row) {
-            $interventionVal = (int) $row['civicrm_option_value_value'];
-            if (isset($interventionToOutcomeMapping[$interventionVal])) {
-                $outcomesRaw = $interventionToOutcomeMapping[$interventionVal];
+            $intervention = (int) $row['civicrm_option_value_value'];
+            if (isset($interventionToOutcomeCount[$intervention])) {
+                $outcomesRaw = $interventionToOutcomeCount[$intervention];
                 $row[self::COL_KEY_OUTCOMES] = $this->formatOutcomesForRow($outcomesRaw);
             } else {
                 $row[self::COL_KEY_OUTCOMES] = 'none';
@@ -199,16 +216,18 @@ class CRM_Nasc_Form_Report_InterventionReport extends CRM_Report_Form
         $interventionKey = $this->getKeyForCustomField('Intervention');
 
         foreach ($activities as $activity) {
-            $activityInterventions = empty($activity[$interventionKey]) ? [] : $activity[$interventionKey];
+            $intervention = $activity[$interventionKey] ?? null;
+            if (!$intervention) {
+                continue;
+            }
+
             $attendeeIds = $activity['target_contact_id'];
-            foreach ($activityInterventions as $interventionVal) {
-                if (!isset($interventionRecipients[$interventionVal])) {
-                    $interventionRecipients[$interventionVal] = [];
-                }
-                foreach ($attendeeIds as $attendeeId) {
-                    if (!in_array($attendeeId, $interventionRecipients[$interventionVal])) {
-                        $interventionRecipients[$interventionVal][] = $attendeeId;
-                    }
+            if (!isset($interventionRecipients[$intervention])) {
+                $interventionRecipients[$intervention] = [];
+            }
+            foreach ($attendeeIds as $attendeeId) {
+                if (!in_array($attendeeId, $interventionRecipients[$intervention])) {
+                    $interventionRecipients[$intervention][] = $attendeeId;
                 }
             }
         }
