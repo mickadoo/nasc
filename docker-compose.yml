@@ -15,7 +15,7 @@ services:
     volumes:
       - buildkit:/buildkit
       - ./build:/buildkit/build
-      - ./extra:/extra
+      - ./:/nasc
       - amp:/buildkit/.amp
       - bower-cache:/buildkit/.cache/bower
       - composer-cache:/buildkit/.composer
