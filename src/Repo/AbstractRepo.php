@@ -17,6 +17,8 @@ class AbstractRepo
 
     public function findBy(array $params): array
     {
+        $params['options']['limit'] = 0;
+
         return civicrm_api3($this->getEntityName(), 'get', $params)['values'];
     }
 
