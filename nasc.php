@@ -10,14 +10,38 @@ use Symfony\Component\Config\FileLocator;
 const NASC_EXT_ROOT = __DIR__;
 
 /**
+ * Implements hook_civicrm_pageRun().
+ *
+ * @param CRM_Core_Page $page
+ */
+function nasc_civicrm_pageRun(&$page) {
+    if ($page instanceof CRM_Contact_Page_View_Summary) {
+        Civi::resources()->addScriptFile('nasc', 'js/contact_summary.js', 0);
+    }
+}
+
+/**
+ * @param string $formName
+ * @param CRM_Core_Form $form
+ */
+function nasc_civicrm_preProcess($formName, &$form) {
+    if ($form instanceof CRM_Contact_Form_Contact) {
+        Civi::resources()->addScriptFile('nasc', 'js/contact_edit.js', 0);
+    }
+}
+
+/**
  * Implements hook_civicrm_config().
  */
 function nasc_civicrm_config()
 {
-    $extRoot = dirname(__FILE__) . DIRECTORY_SEPARATOR;
-    if (strpos(get_include_path(), $extRoot) === false) {
+    static $configured = false;
+
+    if ($configured === false) {
+        $extRoot = __DIR__ . DIRECTORY_SEPARATOR;
         $include_path = $extRoot . PATH_SEPARATOR . get_include_path();
         set_include_path($include_path);
+        $configured = true;
     }
 }
 
