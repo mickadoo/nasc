@@ -152,7 +152,9 @@ class CRM_Nasc_Form_Report_InterventionReport extends CRM_Report_Form
 
         foreach ($rows as &$row) {
             $intervention = (int) $row['civicrm_option_value_value'];
-            if (isset($interventionToOutcomeCount[$intervention])) {
+            $hasOutcomes = !empty($interventionToOutcomeCount[$intervention]);
+            $hasInterventions = !empty($row[self::COL_KEY_PERSON_COUNT]);
+            if ($hasOutcomes && $hasInterventions) {
                 $outcomesRaw = $interventionToOutcomeCount[$intervention];
                 $row[self::COL_KEY_OUTCOMES] = $this->formatOutcomesForRow($outcomesRaw);
             } else {
@@ -174,7 +176,7 @@ class CRM_Nasc_Form_Report_InterventionReport extends CRM_Report_Form
         $recipients = $this->calculateInterventionRecipients($activities, $uniqueCount);
         foreach ($rows as &$row) {
             $interventionVal = (int) $row['civicrm_option_value_value'];
-            if (isset($recipients[$interventionVal])) {
+            if (!empty($recipients[$interventionVal])) {
                 $row[self::COL_KEY_PERSON_COUNT] = count($recipients[$interventionVal]);
             } else {
                 $row[self::COL_KEY_PERSON_COUNT] = '0';
@@ -197,6 +199,7 @@ class CRM_Nasc_Form_Report_InterventionReport extends CRM_Report_Form
         $params = [
             'return' => [$interventionKey, $outcomeKey, 'source_contact_id', 'target_contact_id'],
             $interventionKey => ['IS NOT NULL' => 1],
+            'source_contact_id' => ['IS NOT NULL' => 1],
         ];
 
         $this->addDateParams($params);
