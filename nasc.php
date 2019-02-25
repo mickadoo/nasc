@@ -21,6 +21,19 @@ function nasc_civicrm_pageRun(&$page) {
 }
 
 /**
+ * @param $op
+ * @param $objectName
+ * @param $objectId
+ * @param CRM_Core_DAO_RecurringEntity $objectRef
+ */
+function nasc_civicrm_post($op, $objectName, $objectId, &$objectRef) {
+    $dataCopier = new \Nasc\Hook\Post\RecurringActivityCustomDataCopier();
+    if ($dataCopier->applies($op, $objectName, $objectId, $objectRef)) {
+        $dataCopier->apply($op, $objectName, $objectId, $objectRef);
+    }
+}
+
+/**
  * @param string $formName
  * @param CRM_Core_Form $form
  */
