@@ -78,16 +78,38 @@ class CRM_Nasc_Form_Report_InterventionReport extends CRM_Report_Form
 
     public function alterDisplay(&$rows)
     {
+        $uniqueCount = (bool) $this->getSubmitValue('unique_contacts_value');
+
         if ($this->wasIncludedInSelect($rows, self::COL_KEY_PERSON_COUNT)) {
-            $this->addPersonCount($rows);
+            $this->addPersonCount($rows, $uniqueCount);
         }
 
         if ($this->wasIncludedInSelect($rows, self::COL_KEY_OUTCOMES)) {
-            $this->addOutcomeSummary($rows);
+            $this->addOutcomeSummary($rows, $uniqueCount);
         }
     }
 
-    private function addOutcomeSummary(&$rows) : void
+    private function formatOutcomesForRow(array $outcomesRaw) : string
+    {
+        $outcomeOptions = $this->getOutcomeOptions();
+        $getOutcomeLabelByVal = function ($val) use ($outcomeOptions) {
+            foreach ($outcomeOptions as $outcome) {
+                if ($outcome['value'] == $val) {
+                    return $outcome['label'];
+                }
+            }
+            return '';
+        };
+
+        $output = "";
+        foreach ($outcomesRaw as $outcomeVal => $count) {
+            $output .= sprintf('%s (%d), ', $getOutcomeLabelByVal($outcomeVal), $count);
+        }
+
+        return rtrim($output, ', ');
+    }
+
+    private function addOutcomeSummary(&$rows, $uniqueCount) : void
     {
         $activities = $this->getRelatedActivities();
         $outcomeKey = $this->getKeyForCustomField('Outcomes');
@@ -111,7 +133,8 @@ class CRM_Nasc_Form_Report_InterventionReport extends CRM_Report_Form
                 $attendeeIds = $activity['target_contact_id'];
                 foreach ($attendeeIds as $attendeeId) {
                     // only count each attendee once for an outcome for an intervention
-                    if (!in_array($attendeeId, $interventionToOutcomeMapping[$intervention][$outcomeVal])) {
+                    $wasCounted = in_array($attendeeId, $interventionToOutcomeMapping[$intervention][$outcomeVal]);
+                    if (!$wasCounted || !$uniqueCount) {
                         $interventionToOutcomeMapping[$intervention][$outcomeVal][] = $attendeeId;
                     }
                 }
@@ -138,26 +161,6 @@ class CRM_Nasc_Form_Report_InterventionReport extends CRM_Report_Form
         }
     }
 
-    private function formatOutcomesForRow(array $outcomesRaw) : string
-    {
-        $outcomeOptions = $this->getOutcomeOptions();
-        $getOutcomeLabelByVal = function ($val) use ($outcomeOptions) {
-            foreach ($outcomeOptions as $outcome) {
-                if ($outcome['value'] == $val) {
-                    return $outcome['label'];
-                }
-            }
-            return '';
-        };
-
-        $output = "";
-        foreach ($outcomesRaw as $outcomeVal => $count) {
-            $output .= sprintf('%s (%d), ', $getOutcomeLabelByVal($outcomeVal), $count);
-        }
-
-        return rtrim($output, ', ');
-    }
-
     private function getOutcomeOptions() : array
     {
         $repo = Civi::container()->get(\Nasc\Repo\OptionValueRepo::class);
@@ -165,11 +168,10 @@ class CRM_Nasc_Form_Report_InterventionReport extends CRM_Report_Form
         return $repo->findBy(['option_group_id' => 'outcomes']);
     }
 
-    private function addPersonCount(&$rows) : void
+    private function addPersonCount(&$rows, $uniqueCount) : void
     {
-        $isUnique = (bool) $this->getSubmitValue('unique_contacts_value');
         $activities = $this->getRelatedActivities();
-        $recipients = $this->calculateInterventionRecipients($activities, $isUnique);
+        $recipients = $this->calculateInterventionRecipients($activities, $uniqueCount);
         foreach ($rows as &$row) {
             $interventionVal = (int) $row['civicrm_option_value_value'];
             if (isset($recipients[$interventionVal])) {
