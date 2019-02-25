@@ -32,7 +32,7 @@ class CRM_Nasc_Form_Report_InterventionReport extends CRM_Report_Form
                         'no_display' => TRUE,
                     ],
                     'personCount' => [
-                        'title' => ts('Num Clients'),
+                        'title' => ts('Count'),
                         'required' => FALSE,
                         'type' => CRM_Utils_Type::T_STRING,
                         'dbAlias' => 'id' // this is a hack, it will be replaced by count
@@ -54,6 +54,10 @@ class CRM_Nasc_Form_Report_InterventionReport extends CRM_Report_Form
                         'title' => 'Activity Date',
                         'type' => CRM_Utils_Type::T_DATE,
                     ],
+                    'unique_contacts' => [
+                        'title' => 'Unique Contacts',
+                        'type' => CRM_Utils_Type::T_BOOLEAN,
+                    ],
                 ],
                 'order_bys' => [],
             ],
@@ -64,6 +68,7 @@ class CRM_Nasc_Form_Report_InterventionReport extends CRM_Report_Form
     {
         // need to unset this as it's not a real filter
         unset($this->_columns['civicrm_option_value']['filters']['activity_date']);
+        unset($this->_columns['civicrm_option_value']['filters']['unique_contacts']);
         parent::postProcess();
     }
 
@@ -162,8 +167,9 @@ class CRM_Nasc_Form_Report_InterventionReport extends CRM_Report_Form
 
     private function addPersonCount(&$rows) : void
     {
+        $isUnique = (bool) $this->getSubmitValue('unique_contacts_value');
         $activities = $this->getRelatedActivities();
-        $recipients = $this->calculateInterventionRecipients($activities);
+        $recipients = $this->calculateInterventionRecipients($activities, $isUnique);
         foreach ($rows as &$row) {
             $interventionVal = (int) $row['civicrm_option_value_value'];
             if (isset($recipients[$interventionVal])) {
@@ -208,9 +214,10 @@ class CRM_Nasc_Form_Report_InterventionReport extends CRM_Report_Form
      * Maps intervention value to the recipient IDs for it
      *
      * @param array $activities
+     * @param bool $unique Whether recipients should be uniquely counted or not
      * @return array
      */
-    public function calculateInterventionRecipients(array $activities): array
+    public function calculateInterventionRecipients(array $activities, bool $unique): array
     {
         $interventionRecipients = [];
         $interventionKey = $this->getKeyForCustomField('Intervention');
@@ -226,7 +233,8 @@ class CRM_Nasc_Form_Report_InterventionReport extends CRM_Report_Form
                 $interventionRecipients[$intervention] = [];
             }
             foreach ($attendeeIds as $attendeeId) {
-                if (!in_array($attendeeId, $interventionRecipients[$intervention])) {
+                $wasCounted = in_array($attendeeId, $interventionRecipients[$intervention]);
+                if (!$unique || !$wasCounted) {
                     $interventionRecipients[$intervention][] = $attendeeId;
                 }
             }
