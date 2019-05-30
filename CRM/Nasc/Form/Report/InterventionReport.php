@@ -200,6 +200,7 @@ class CRM_Nasc_Form_Report_InterventionReport extends CRM_Report_Form
             'return' => [$interventionKey, $outcomeKey, 'source_contact_id', 'target_contact_id'],
             $interventionKey => ['IS NOT NULL' => 1],
             'source_contact_id' => ['IS NOT NULL' => 1],
+            'options' => ['limit' => 0],
         ];
 
         $this->addDateParams($params);
