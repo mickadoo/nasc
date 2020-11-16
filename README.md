@@ -1,5 +1,7 @@
 # nasc
 
+CiviCRM extension for NASC Ireland site
+
 ## Requirements
 
 * PHP v7.2+
